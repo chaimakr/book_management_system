@@ -3,7 +3,7 @@ A simple CRUD application to manage books.<br>
 We'll be using the CQRS (Command and Query Responsibility Segregation) pattern when querying between our microservices. 
 ## Application Architecture 
 <p align="center">
-  <img src=".Docs/../Docs/Untitled%20Diagram.drawio.png" alt="Project architecture">
+  <img src="./docs/architecture.png" alt="Project architecture">
 </p>
 ## To Do List
 
@@ -14,4 +14,5 @@ We'll be using the CQRS (Command and Query Responsibility Segregation) pattern w
 
 ## Optional to do list
 - [ ] Add a pre-commit hook.
+- [ ] Add tests to the services
 - [ ] Add Frontend
