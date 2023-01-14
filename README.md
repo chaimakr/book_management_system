@@ -10,9 +10,4 @@ We'll be using the CQRS (Command and Query Responsibility Segregation) pattern w
 - [ ] Prepare the project & each ms architecture
 - [ ] Create the Read microservice
 - [ ] Create the Write microservice
-- [ ] Link the microservices with a single Database
 
-## Optional to do list
-- [ ] Add a pre-commit hook.
-- [ ] Add tests to the services
-- [ ] Add Frontend
