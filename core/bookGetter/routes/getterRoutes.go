@@ -1,7 +1,7 @@
 package routes
 
 // import (
-// 	"bookGetter/pkg/controllers"
+// 	"getter//controllers"
 // 	"github.com/gorilla/mux"
 // )
 

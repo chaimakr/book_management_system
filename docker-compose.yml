@@ -14,11 +14,10 @@ services:
       - MONGO_DB_PASSWORD=user
     volumes:
       - ./db/mongo/data:/data/db/
-      - ./log/mongo/logs:/var/log/mongodb/
-      - ./database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro 
-
+      - ./initdb.d:/docker-entrypoint-initdb.d/
   app:
-    build: .
+    build: ./core/bookGetter
+    container_name: bookGetter
     ports:
       - "8123:8080"
     depends_on:
