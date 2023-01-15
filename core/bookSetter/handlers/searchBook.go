@@ -17,7 +17,7 @@ func SearchBooks(db database.BookInterface) gin.HandlerFunc {
 			err := json.Unmarshal([]byte(query), &filter)
 			if err != nil {
 				c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-
+				//g.GetMonitor().GetMetric("totalRequest").Inc([]string{"route_/books", "status_400", "requestType_GET"})
 				return
 			}
 		}
@@ -25,8 +25,10 @@ func SearchBooks(db database.BookInterface) gin.HandlerFunc {
 		res, err := db.Search(filter)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-
+			//g.GetMonitor().GetMetric("totalRequest").Inc([]string{"route_/books", "status_400", "requestType_GET"})
 			return
+		} else {
+			//g.GetMonitor().GetMetric("totalRequest").Inc([]string{"route_/books", "status_200", "requestType_GET"})
 		}
 
 		c.JSON(http.StatusOK, res)
