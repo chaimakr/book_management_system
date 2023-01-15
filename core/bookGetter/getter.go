@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"net/http"
 
 	"github.com/chaimakr/book_management_system/core/getter/config"
 	"github.com/chaimakr/book_management_system/core/getter/database"
-	"github.com/gorilla/mux"
+	"github.com/chaimakr/book_management_system/core/getter/handlers"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -19,11 +19,21 @@ func main() {
 
 	fmt.Println(conf, collection, db)
 
-	// client := &database.TodoClient{
-	// 	Col: collection,
-	// 	Ctx: ctx,
-	// }
+	client := &database.BookClient{
+		Col: collection,
+		Ctx: ctx,
+	}
 
-	r := mux.NewRouter()
-	http.ListenAndServe(":8080", r)
+	r := gin.Default()
+
+	todos := r.Group("/books")
+	{
+		todos.GET("/", handlers.SearchBooks(client))
+		todos.GET("/:id", handlers.GetBook(client))
+		todos.POST("/add", handlers.InsertBook(client))
+		todos.PATCH("/:id", handlers.UpdateBook(client))
+		todos.DELETE("/:id", handlers.DeleteBook(client))
+	}
+
+	r.Run(":8080")
 }

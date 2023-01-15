@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"net/http"
@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func UpdateBook(db database.TodoInterface) gin.HandlerFunc {
+func UpdateBook(db database.BookInterface) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var book interface{}
 		id := c.Param("id")
