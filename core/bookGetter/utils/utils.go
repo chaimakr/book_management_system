@@ -43,7 +43,7 @@ func BuildTracer() trace.Tracer {
 
 	otel.SetTracerProvider(provider)
 
-	return otel.Tracer("fact-service")
+	return otel.Tracer("Book_management_system")
 }
 
 func BuildLogger() *zap.SugaredLogger {
