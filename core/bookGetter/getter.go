@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"net/http"
 
 	"github.com/chaimakr/book_management_system/core/getter/config"
 	"github.com/chaimakr/book_management_system/core/getter/database"
@@ -20,7 +21,7 @@ func main() {
 		Col: collection,
 		Ctx: ctx,
 	}
-
+	req := http.Request{}
 	r := gin.Default()
 
 	// get global Monitor object
@@ -30,8 +31,8 @@ func main() {
 	m.Use(r)
 	todos := r.Group("/books")
 	{
-		todos.GET("/", handlers.SearchBooks(client))
-		todos.GET("/:id", handlers.GetBook(client))
+		todos.GET("/", handlers.SearchBooks(client, &req))
+		todos.GET("/:id", handlers.GetBook(client, &req))
 	}
 
 	// +optional set metric path, default /debug/metrics
