@@ -10,10 +10,10 @@ services:
       - MONGO_INITDB_DATABASE=bookstore
     volumes:
       - ./db/mongo/data:/data/db/
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro  
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro   
   app:
-    build: ./core/bookGetter
-    container_name: bookGetter
+    build: ./core/bookSetter
+    container_name: bookSetter
     ports:
       - "8123:8080"
     depends_on:

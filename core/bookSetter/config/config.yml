@@ -1,0 +1,6 @@
+environment: dev
+token: ABCDEFG
+mongo:
+  server: mongodb://localhost:27017
+  database: bookstore
+  collection: books
