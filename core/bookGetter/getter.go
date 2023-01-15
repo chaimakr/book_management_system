@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 
-	"github.com/chaimakr/book_management_system/core/setter/config"
-	"github.com/chaimakr/book_management_system/core/setter/database"
-	"github.com/chaimakr/book_management_system/core/setter/handlers"
+	"github.com/chaimakr/book_management_system/core/getter/config"
+	"github.com/chaimakr/book_management_system/core/getter/database"
+	"github.com/chaimakr/book_management_system/core/getter/handlers"
 	"github.com/gin-gonic/gin"
 	"github.com/penglongli/gin-metrics/ginmetrics"
 )
@@ -30,12 +30,11 @@ func main() {
 	m.Use(r)
 	todos := r.Group("/books")
 	{
-		todos.POST("/add", handlers.InsertBook(client))
-		todos.PATCH("/:id", handlers.UpdateBook(client))
-		todos.DELETE("/:id", handlers.DeleteBook(client))
+		todos.GET("/", handlers.SearchBooks(client))
+		todos.GET("/:id", handlers.GetBook(client))
 	}
 
 	// +optional set metric path, default /debug/metrics
 	m.SetMetricPath("/metrics")
-	r.Run(":8080")
+	r.Run(":8081")
 }

@@ -11,10 +11,17 @@ services:
     volumes:
       - ./db/mongo/data:/data/db/
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro   
-  app:
+  command:
     build: ./core/bookSetter
     container_name: bookSetter
     ports:
       - "8123:8080"
+    depends_on:
+      - mongo
+  query:
+    build: ./core/bookGetter
+    container_name: bookGetter
+    ports:
+      - "8124:8081"
     depends_on:
       - mongo

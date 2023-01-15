@@ -1,0 +1,15 @@
+package utils
+
+import (
+	"github.com/google/uuid"
+)
+
+func getRequestID(r *http.Request) string {
+	// No request id found.
+	hv := r.Header.Get("X-Request-ID")
+	if hv != "" {
+		return hv
+	}
+
+	return uuid.NewString()
+}

@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/chaimakr/book_management_system/core/setter/database"
+	"github.com/chaimakr/book_management_system/core/getter/database"
 
 	"github.com/gin-gonic/gin"
 )
