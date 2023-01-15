@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/chaimakr/book_management_system/core/setter/config"
 	"github.com/chaimakr/book_management_system/core/setter/database"
@@ -11,15 +10,11 @@ import (
 )
 
 func main() {
+
 	conf := config.GetConfig()
 	ctx := context.TODO()
-	fmt.Println(conf)
 	db := database.ConnectDB(ctx, conf.Mongo)
-	fmt.Println("THIS IS THE CONF.MONGO : ", conf.Mongo)
 	collection := db.Collection(conf.Mongo.Collection)
-
-	fmt.Println(conf, collection, db)
-
 	client := &database.BookClient{
 		Col: collection,
 		Ctx: ctx,
@@ -35,6 +30,5 @@ func main() {
 		todos.PATCH("/:id", handlers.UpdateBook(client))
 		todos.DELETE("/:id", handlers.DeleteBook(client))
 	}
-
 	r.Run(":8080")
 }
