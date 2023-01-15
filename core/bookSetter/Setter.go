@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
-
 	"github.com/chaimakr/book_management_system/core/setter/config"
 	"github.com/chaimakr/book_management_system/core/setter/database"
 	"github.com/chaimakr/book_management_system/core/setter/handlers"
 	"github.com/gin-gonic/gin"
+	"github.com/penglongli/gin-metrics/ginmetrics"
 )
 
 func main() {
@@ -22,6 +22,11 @@ func main() {
 
 	r := gin.Default()
 
+	// get global Monitor object
+	m := ginmetrics.GetMonitor()
+
+	// set middleware for gin
+	m.Use(r)
 	todos := r.Group("/books")
 	{
 		todos.GET("/", handlers.SearchBooks(client))
@@ -30,5 +35,8 @@ func main() {
 		todos.PATCH("/:id", handlers.UpdateBook(client))
 		todos.DELETE("/:id", handlers.DeleteBook(client))
 	}
+
+	// +optional set metric path, default /debug/metrics
+	m.SetMetricPath("/metrics")
 	r.Run(":8080")
 }
