@@ -27,4 +27,4 @@ jobs:
               context: ./core/${{ matrix.service }}/
               file: ./core/${{ matrix.service }}/Dockerfile
               push: true
-              tags: ${{ secrets.DOCKER_HUB_USERNAME }}/book_ms:${{matrix.service}}:${{ github.sha }}
+              tags: ${{ secrets.DOCKER_HUB_USERNAME }}/book_ms:${{matrix.service}}-${{ github.sha }}
