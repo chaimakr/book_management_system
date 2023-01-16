@@ -27,6 +27,9 @@ func main() {
 	// get global Monitor object
 	m := ginmetrics.GetMonitor()
 
+	// +optional set metric path, default /debug/metrics
+	m.SetMetricPath("/query/metrics")
+
 	// set middleware for gin
 	m.Use(r)
 	todos := r.Group("/query")
@@ -35,7 +38,5 @@ func main() {
 		todos.GET("/:id", handlers.GetBook(client, &req))
 	}
 
-	// +optional set metric path, default /debug/metrics
-	m.SetMetricPath("/query/metrics")
 	r.Run(":8081")
 }

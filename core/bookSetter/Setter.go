@@ -26,6 +26,9 @@ func main() {
 	// get global Monitor object
 	m := ginmetrics.GetMonitor()
 
+	// +optional set metric path, default /debug/metrics
+	m.SetMetricPath("/command/metrics")
+
 	// set middleware for gin
 	m.Use(r)
 	todos := r.Group("/command")
@@ -35,7 +38,5 @@ func main() {
 		todos.DELETE("/:id", handlers.DeleteBook(client))
 	}
 
-	// +optional set metric path, default /debug/metrics
-	m.SetMetricPath("/command/metrics")
 	r.Run(":8080")
 }
