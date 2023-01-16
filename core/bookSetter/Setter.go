@@ -28,7 +28,7 @@ func main() {
 
 	// set middleware for gin
 	m.Use(r)
-	todos := r.Group("/books")
+	todos := r.Group("/command")
 	{
 		todos.POST("/add", handlers.InsertBook(client))
 		todos.PATCH("/:id", handlers.UpdateBook(client))
@@ -36,6 +36,6 @@ func main() {
 	}
 
 	// +optional set metric path, default /debug/metrics
-	m.SetMetricPath("/metrics")
+	m.SetMetricPath("/command/metrics")
 	r.Run(":8080")
 }

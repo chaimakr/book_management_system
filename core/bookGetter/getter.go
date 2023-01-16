@@ -29,13 +29,13 @@ func main() {
 
 	// set middleware for gin
 	m.Use(r)
-	todos := r.Group("/books")
+	todos := r.Group("/query")
 	{
 		todos.GET("/", handlers.SearchBooks(client, &req))
 		todos.GET("/:id", handlers.GetBook(client, &req))
 	}
 
 	// +optional set metric path, default /debug/metrics
-	m.SetMetricPath("/metrics")
+	m.SetMetricPath("/query/metrics")
 	r.Run(":8081")
 }
