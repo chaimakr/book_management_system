@@ -1,8 +1,8 @@
 version: "3"
 services:
-  mongo:
+  mongodb:
     image: mongo:4.4
-    container_name: mongo
+    container_name: mongodb
     restart: unless-stopped
     ports:
       - 27017:27017
@@ -17,11 +17,11 @@ services:
     ports:
       - "8123:8080"
     depends_on:
-      - mongo
+      - mongodb
   query:
     build: ./core/bookGetter
     container_name: bookGetter
     ports:
       - "8124:8081"
     depends_on:
-      - mongo
+      - mongodb
