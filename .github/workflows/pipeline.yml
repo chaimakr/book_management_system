@@ -18,8 +18,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./core/${{ bookGetter }}/
-          file: ./core/${{ bookGetter }}/Dockerfile
+          context: ./core/bookGetter
+          file: ./core/bookGetter/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/book_ms-bookgetter
   book-setter:
@@ -34,7 +34,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./core/${{ bookSetter }}/
-          file: ./core/${{ bookSetter }}/Dockerfile
+          context: ./core/bookSetter
+          file: ./core/bookSetter/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/book_ms-booksetter
