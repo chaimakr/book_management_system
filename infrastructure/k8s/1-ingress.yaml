@@ -13,14 +13,14 @@ spec:
           path: "/query"
           backend:
             service:
-              name: book-getter
+              name: book-getter-service
               port: 
                 number: 80
         - pathType: Prefix
           path: "/command"
           backend:
             service:
-              name: book-setter
+              name: book-setter-service
               port: 
                 number: 80
         # - pathType: exact

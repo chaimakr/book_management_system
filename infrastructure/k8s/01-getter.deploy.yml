@@ -11,6 +11,10 @@ spec:
       app: book-getter
   template:
     metadata:
+      annotations:
+        prometheus.io/port: "8081"
+        prometheus.io/path: "/query/metrics"
+        prometheus.io/scrape: "true"
       labels:
         app: book-getter
     spec:
