@@ -9,10 +9,14 @@ import (
 	"github.com/chaimakr/book_management_system/core/getter/handlers"
 	"github.com/gin-gonic/gin"
 	"github.com/penglongli/gin-metrics/ginmetrics"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	gintrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin"
 )
 
 func main() {
 
+	tracer.Start()
+	defer tracer.Stop()
 	conf := config.GetConfig()
 	ctx := context.TODO()
 	db := database.ConnectDB(ctx, conf.Mongo)
@@ -23,6 +27,9 @@ func main() {
 	}
 	req := http.Request{}
 	r := gin.Default()
+
+	// Use the tracer middleware with your desired service name.
+	r.Use(gintrace.Middleware("my-web-app"))
 
 	// get global Monitor object
 	m := ginmetrics.GetMonitor()

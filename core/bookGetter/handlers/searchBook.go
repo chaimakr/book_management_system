@@ -30,7 +30,7 @@ func SearchBooks(db database.BookInterface, r *http.Request) gin.HandlerFunc {
 		if query != "" {
 			err := json.Unmarshal([]byte(query), &filter)
 			if err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+				c.JSON(http.StatusBadRequest, gin.H{"default message": err.Error()})
 				requestLogger.Errorw("Failed to retrieve books")
 				return
 			}
@@ -41,10 +41,9 @@ func SearchBooks(db database.BookInterface, r *http.Request) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 			requestLogger.Errorw("Failed to retrieve books")
 			return
-		} else {
-			requestLogger.Infow("books retrieved successfully")
 		}
-
 		c.JSON(http.StatusOK, res)
+		requestLogger.Infow("books retrieved successfully")
+
 	}
 }
