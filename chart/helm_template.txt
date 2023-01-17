@@ -1,0 +1,108 @@
+---
+# Source: book-management/templates/01-bookgetter/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+ name: book-getter-service
+spec:
+ selector:
+  app: book-getter
+ ports:
+ - name: book-getter-port
+   port: 80
+   targetPort: 8081
+---
+# Source: book-management/templates/02-booksetter/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+ name: book-setter-service
+spec:
+ selector:
+  app: book-setter
+ ports:
+ - name: book-setter-port
+   port: 80
+   targetPort: 8080
+---
+# Source: book-management/templates/01-bookgetter/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-getter
+  labels:
+    app: book-getter
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: book-getter
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "8081"
+        prometheus.io/path: "/query/metrics"
+        prometheus.io/scrape: "true"
+      labels:
+        app: book-getter
+    spec:
+      containers:
+      - name: book-getter
+        image: chaimakr/book_ms-bookgetter
+        imagePullPolicy: Always 
+        ports:
+---
+# Source: book-management/templates/02-booksetter/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-setter
+  labels:
+    app: book-setter
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: book-setter
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/command/metrics"
+        prometheus.io/scrape: "true"
+      labels:
+        app: book-setter
+    spec:
+      containers:
+      - name: book-setter
+        image: chaimakr/book_ms-booksetter
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 8080
+---
+# Source: book-management/templates/03-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  labels:
+    name: myingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+        - pathType: Prefix
+          path: "/query"
+          backend:
+            service:
+              name: book-getter-service
+              port: 
+                number: 80
+        - pathType: Prefix
+          path: "/command"
+          backend:
+            service:
+              name: book-setter-service
+              port: 
+                number: 80

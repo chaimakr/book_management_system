@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-setter
+  labels:
+    app: book-setter
+spec:
+  replicas: {{ .Values.booksetter_service.replicas }}
+  selector:
+    matchLabels:
+      app: book-setter
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/command/metrics"
+        prometheus.io/scrape: "true"
+      labels:
+        app: book-setter
+    spec:
+      containers:
+      - name: book-setter
+        image: {{ .Values.booksetter_service.image.name }}
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 8080

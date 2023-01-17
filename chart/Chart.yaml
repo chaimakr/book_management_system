@@ -1,0 +1,4 @@
+apiVersion: v2
+name: book-management
+version: 0.1.0
+description: Book Management System API Helm Chart

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: {{ .Values.booksetter_service.service.name}}
+spec:
+ selector:
+  app: book-setter
+ ports:
+ - name: book-setter-port
+   port: 80
+   targetPort: 8080

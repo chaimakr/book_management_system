@@ -1,0 +1,14 @@
+bookgetter_service:
+  image:
+    name: chaimakr/book_ms-bookgetter
+    tag: latest
+  replicas: 2
+  service: 
+    name: book-getter-service
+booksetter_service:
+  image:
+    name: chaimakr/book_ms-booksetter
+    tag: latest
+  replicas: 2
+  service:
+    name: book-setter-service

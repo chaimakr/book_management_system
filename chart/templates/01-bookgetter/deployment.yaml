@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-getter
+  labels:
+    app: book-getter
+spec:
+  replicas: {{ .Values.bookgetter_service.replicas }}
+  selector:
+    matchLabels:
+      app: book-getter
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "8081"
+        prometheus.io/path: "/query/metrics"
+        prometheus.io/scrape: "true"
+      labels:
+        app: book-getter
+    spec:
+      containers:
+      - name: book-getter
+        image: {{ .Values.bookgetter_service.image.name }}
+        imagePullPolicy: Always 
+        ports:
