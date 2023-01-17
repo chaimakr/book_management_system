@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tags.datadoghq.com/env: dev
+    tags.datadoghq.com/service: book-getter-service
+    tags.datadoghq.com/version: 0.1.0
+spec:
+  template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: dev
+        tags.datadoghq.com/service: book-getter-service
+        tags.datadoghq.com/version: 0.1.0
+    spec:
+      volumes:
+        - hostPath:
+            path: /var/run/datadog/
+          name: apmsocketpath
+      containers:
+        - name: chaimakr/book_ms-bookgetter
+          image: chaimakr/book_ms-bookgetter/latest
+          volumeMounts:
+            - name: apmsocketpath
+              mountPath: /var/run/datadog
+          env:
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
