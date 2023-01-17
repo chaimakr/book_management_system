@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"net/http"
-	"log"
 	"github.com/chaimakr/book_management_system/core/getter/config"
 	"github.com/chaimakr/book_management_system/core/getter/database"
 	"github.com/chaimakr/book_management_system/core/getter/handlers"
@@ -11,21 +10,20 @@ import (
 	"github.com/penglongli/gin-metrics/ginmetrics"
 	gintrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
 )
 
 func main() {
 
 
-	err := profiler.Start(
-		profiler.WithService("book-getter-service"),
-		profiler.WithEnv("dev"),
-		profiler.WithVersion("0.1.0"),
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer profiler.Stop()
+	// err := profiler.Start(
+	// 	profiler.WithService("book-getter-service"),
+	// 	profiler.WithEnv("dev"),
+	// 	profiler.WithVersion("0.1.0"),
+	// )
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// defer profiler.Stop()
 
 	tracer.Start()
 	defer tracer.Stop()
