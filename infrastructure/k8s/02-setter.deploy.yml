@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-setter
+  labels:
+    app: book-setter
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: book-setter
+  template:
+    metadata:
+      labels:
+        app: book-setter
+    spec:
+      containers:
+      - name: book-setter
+        image: chaimakr/book_ms-booksetter
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 8080

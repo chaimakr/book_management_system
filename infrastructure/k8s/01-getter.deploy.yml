@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-getter
+  labels:
+    app: book-getter
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: book-getter
+  template:
+    metadata:
+      labels:
+        app: book-getter
+    spec:
+      containers:
+      - name: book-getter
+        image: chaimakr/book_ms-bookgetter
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 8081
