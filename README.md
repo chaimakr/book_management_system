@@ -39,7 +39,9 @@ The traces dashboard :
   <img src="./docs/traces-dashboard.png" alt="Project architecture">
 </p>
 
-
+<p align="center">
+  <img src="./docs/kube.png" alt="Project architecture">
+</p>
 
 
 
