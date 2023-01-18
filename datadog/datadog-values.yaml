@@ -1,5 +1,5 @@
 datadog:
-  site: datadoghq.com
+  site: datadoghq.eu
   
   kubelet: 
     tlsVerify: false
@@ -7,12 +7,12 @@ datadog:
   logs:
     enabled: true
     containerCollectAll: true
-  otlp:
-    receiver:
-      protocols:
-        grpc:
-          enabled: true
-        http:
-          enabled: true
+  # otlp:
+  #   receiver:
+  #     protocols:
+  #       grpc:
+  #         enabled: true
+  #       http:
+  #         enabled: true
   apm:
     portEnabled: true
