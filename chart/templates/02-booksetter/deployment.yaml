@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: book-setter
   labels:
+    tags.datadoghq.com/env: myenv
+    tags.datadoghq.com/service: book-setter-service
+    tags.datadoghq.com/version: "1"
+    admission.datadoghq.com/enabled: "true"
     app: book-setter
 spec:
   replicas: {{ .Values.booksetter_service.replicas }}
@@ -18,9 +22,37 @@ spec:
       labels:
         app: book-setter
     spec:
+      volumes:
+        - hostPath:
+            path: /var/run/datadog/
+          name: apmsocketpath
       containers:
       - name: book-setter
         image: {{ .Values.booksetter_service.image.name }}
         imagePullPolicy: Always 
         ports:
         - containerPort: 8080
+        env:
+            - name: DD_LOGS_INJECTION
+              value: "true"
+            - name: DD_TRACE_STARTUP_LOGS
+              value: "true"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_SITE
+              value: "datadoghq.eu"
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+                
