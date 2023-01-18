@@ -15,15 +15,15 @@ import (
 func main() {
 
 
-	// err := profiler.Start(
-	// 	profiler.WithService("book-getter-service"),
-	// 	profiler.WithEnv("dev"),
-	// 	profiler.WithVersion("0.1.0"),
-	// )
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// defer profiler.Stop()
+	 err := profiler.Start(
+	 	profiler.WithService("book-getter-service"),
+	 	profiler.WithEnv("dev"),
+	 	profiler.WithVersion("0.1.0"),
+	 )
+	 if err != nil {
+	 	log.Fatal(err)
+	 }
+	 defer profiler.Stop()
 
 	tracer.Start()
 	defer tracer.Stop()
