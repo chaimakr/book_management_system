@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "terra-book-ms" {
   name     = "terra-book-ms"
-  location = "West US 3"
+  location = "France Central"
 }
 resource "azurerm_storage_account" "bms-storage-account" {
   name                     = "bmsbackend"

@@ -8,17 +8,6 @@ data "terraform_remote_state" "aks" {
   }
 }
 
-# resource "kubernetes_config_map" "database_config_map" {
-#     metadata {
-#       name = var.config_map_name
-#       labels = {
-#         app = "mongodb"
-#       }
-#     }
-#     data = {
-#     }
-    
-# }
 
 resource "kubernetes_persistent_volume" "mongo-pv" {
     metadata {
