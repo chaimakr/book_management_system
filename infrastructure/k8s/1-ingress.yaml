@@ -23,17 +23,3 @@ spec:
               name: book-setter-service
               port: 
                 number: 80
-        # - pathType: exact
-        #   path: "/query/metrics"
-        #   backend:
-        #     service:
-        #       name: prometheus-server
-        #       port: 
-        #         number: 8124
-        # - pathType: exact
-        #   path: "/command/metrics"
-        #   backend:
-        #     service:
-        #       name: prometheus-server
-        #       port: 
-        #         number: 8123
