@@ -1,6 +1,9 @@
+targetSystem: "linux"
+
 datadog:
   site: datadoghq.eu
-  
+  # datadog.apiKey -- Your Datadog API key
+  apiKey: "{{ dd_api_key }}"
   kubelet: 
     tlsVerify: false
   
@@ -16,3 +19,9 @@ datadog:
   #         enabled: true
   apm:
     portEnabled: true
+    apm_non_local_traffic: true
+
+  clusterAgent:
+    admissionController:
+      enabled: true
+      mutateUnlabelled: true

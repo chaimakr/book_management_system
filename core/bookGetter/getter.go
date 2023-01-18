@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"github.com/chaimakr/book_management_system/core/getter/config"
 	"github.com/chaimakr/book_management_system/core/getter/database"
@@ -10,6 +11,8 @@ import (
 	"github.com/penglongli/gin-metrics/ginmetrics"
 	gintrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
+
 )
 
 func main() {

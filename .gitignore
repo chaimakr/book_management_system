@@ -1,2 +1,7 @@
 db
 initdb.d
+.terraform
+terraform.tfvars
+datadog
+.env
+terraform.tfstate
