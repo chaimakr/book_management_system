@@ -25,24 +25,26 @@ I used datadog to persist and visualise the application logs, the attribute adde
 <p align="center">
   <img src="./docs/logs-attr.png" alt="Project architecture">
 </p>
-The logs dashboard :
+
+## The logs dashboard :
 <p align="center">
   <img src="./docs/logs-dashboard.png" alt="Project architecture">
 </p>
-A trace example
+
+## A trace example
 <p align="center">
   <img src="./docs/trace.png" alt="Project architecture">
 </p>
 
-The traces dashboard :
+## The traces dashboard :
 <p align="center">
   <img src="./docs/traces-dashboard.png" alt="Project architecture">
 </p>
 
+## Grafana dashboard :
 <p align="center">
-  <img src="./docs/kube.png" alt="Project architecture">
+  <img src="./docs/grafana.png" alt="Project architecture">
 </p>
-
 
 
 
